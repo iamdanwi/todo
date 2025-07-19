@@ -49,12 +49,12 @@ export default function Home() {
         <div className="mt-8">
           <Dialog>
             <div className="flex justify-between items-center mb-4">
-          <h3 className="text-2xl font-semibold text-neutral-800">Tasks</h3>
-            <DialogTrigger asChild>
-              <Button  >
-              <Plus />
-              </Button>
-            </DialogTrigger>
+              <h3 className="text-2xl font-semibold text-neutral-800">Tasks</h3>
+              <DialogTrigger asChild>
+                <Button>
+                  <Plus />
+                </Button>
+              </DialogTrigger>
             </div>
             <DialogContent className="sm:max-w-[425px]">
               <DialogHeader>
@@ -81,14 +81,15 @@ export default function Home() {
                 <DialogClose asChild>
                   <Button variant="outline">Cancel</Button>
                 </DialogClose>
-                <DialogClose asChild><Button onClick={addTask} >Save changes</Button></DialogClose>
-                
+                <DialogClose asChild>
+                  <Button onClick={addTask}>Save changes</Button>
+                </DialogClose>
               </DialogFooter>
             </DialogContent>
           </Dialog>
 
-          <ScrollArea className="h-[500px] w-full p-4 overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
-            <div className="pr-4 space-y-4">
+          <ScrollArea className="h-[500px] w-full p-4">
+            <div className="space-y-4">
               {tasks.length === 0 ? (
                 <p className="text-muted-foreground">No tasks yet. Add one</p>
               ) : (
