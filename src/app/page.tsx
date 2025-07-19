@@ -72,7 +72,7 @@ export default function Home() {
           Hello, <span className="text-neutral-500">there!</span>
         </h1>
         <p className="text-muted-foreground italic mt-2">
-          "The secret of getting ahead is getting started."
+          &quote;The secret of getting ahead is getting started.&quote;
         </p>
       </header>
 
