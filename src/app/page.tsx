@@ -18,7 +18,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Plus } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
 
 type Task = {
   title: string;
@@ -43,90 +43,90 @@ export default function Home() {
   }, [tasks]);
 
   const addTask = () => {
-    if (input.trim() === "") return;
-    setTasks((prev) => [
-      ...prev,
-      {
-        title: input.trim(),
-        desc: description.trim(),
-        completed: false,
-      },
-    ]);
+    if (!input.trim()) return;
+    const newTask: Task = {
+      title: input.trim(),
+      desc: description.trim(),
+      completed: false,
+    };
+    setTasks([...tasks, newTask]);
     setInput("");
     setDescription("");
   };
 
   const toggleTask = (index: number) => {
-    setTasks((prev) =>
-      prev.map((task, i) =>
-        i === index ? { ...task, completed: !task.completed } : task
-      )
-    );
+    const updated = [...tasks];
+    updated[index].completed = !updated[index].completed;
+    setTasks(updated);
+  };
+
+  const deleteTask = (index: number) => {
+    const updated = tasks.filter((_, i) => i !== index);
+    setTasks(updated);
   };
 
   return (
     <main className="flex min-h-screen flex-col p-6 space-y-5">
-      <div>
+      <header>
         <h1 className="text-2xl md:text-4xl font-semibold text-neutral-900">
           Hello, <span className="text-neutral-500">there!</span>
         </h1>
         <p className="text-muted-foreground italic mt-2">
-          &quot;The secret of getting ahead is getting started.&quot;
+          "The secret of getting ahead is getting started."
         </p>
-      </div>
+      </header>
 
       <section className="flex flex-col space-y-3 w-full md:w-1/2 md:mx-auto">
-        <div className="mt-8">
-          <Dialog>
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-2xl font-semibold text-neutral-800">Tasks</h3>
-              <DialogTrigger asChild>
-                <Button>
-                  <Plus />
-                </Button>
-              </DialogTrigger>
+        <Dialog>
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-2xl font-semibold text-neutral-800">Tasks</h3>
+            <DialogTrigger asChild>
+              <Button>
+                <Plus />
+              </Button>
+            </DialogTrigger>
+          </div>
+
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Add Task</DialogTitle>
+              <DialogDescription>Add a new task to your list.</DialogDescription>
+            </DialogHeader>
+
+            <div className="flex flex-col space-y-4">
+              <Input
+                placeholder="Task title..."
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                className="py-6"
+              />
+              <Textarea
+                placeholder="Add a description (optional)..."
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
             </div>
 
-            <DialogContent className="sm:max-w-[425px]">
-              <DialogHeader>
-                <DialogTitle>Add Task</DialogTitle>
-                <DialogDescription>Add a new task to your list.</DialogDescription>
-              </DialogHeader>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="outline">Cancel</Button>
+              </DialogClose>
+              <DialogClose asChild>
+                <Button onClick={addTask}>Add</Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
 
-              <div className="flex flex-col space-y-4">
-                <Input
-                  type="text"
-                  placeholder="Task title..."
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  className="py-6"
-                />
-                <Textarea
-                  placeholder="Add a description (optional)..."
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-              </div>
-
-              <DialogFooter>
-                <DialogClose asChild>
-                  <Button variant="outline">Cancel</Button>
-                </DialogClose>
-                <DialogClose asChild>
-                  <Button onClick={addTask}>Save changes</Button>
-                </DialogClose>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
-
-          <ScrollArea className="h-[500px] w-full p-4 overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
-            <div className="space-y-4">
-              {tasks.length === 0 ? (
-                <p className="text-muted-foreground">No tasks yet. Add one</p>
-              ) : (
-                tasks.map((task, index) => (
-                  <div key={index}>
-                    <div className="flex items-start space-x-3 py-2">
+        <ScrollArea className="h-[500px] w-full p-4 overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+          <div className="space-y-4">
+            {tasks.length === 0 ? (
+              <p className="text-muted-foreground">No tasks yet. Add one.</p>
+            ) : (
+              tasks.map((task, index) => (
+                <div key={index}>
+                  <div className="flex items-start justify-between py-2">
+                    <div className="flex items-start space-x-3">
                       <Checkbox
                         id={`task-${index}`}
                         checked={task.completed}
@@ -140,19 +140,25 @@ export default function Home() {
                           {task.title}
                         </Label>
                         {task.desc && (
-                          <p className="text-sm text-muted-foreground">
-                            {task.desc}
-                          </p>
+                          <p className="text-sm text-muted-foreground">{task.desc}</p>
                         )}
                       </div>
                     </div>
-                    {index < tasks.length - 1 && <Separator />}
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      onClick={() => deleteTask(index)}
+                      className="text-red-500"
+                    >
+                      <Trash2 size={16} />
+                    </Button>
                   </div>
-                ))
-              )}
-            </div>
-          </ScrollArea>
-        </div>
+                  {index < tasks.length - 1 && <Separator />}
+                </div>
+              ))
+            )}
+          </div>
+        </ScrollArea>
       </section>
     </main>
   );
