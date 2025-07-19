@@ -122,12 +122,10 @@ todo-app/
 ---
 
 ## 🎨 **Preview**
-
-> **Note:** Add your actual screenshots here by replacing the placeholder text below with:
-> ```markdown
-> ![Desktop Screenshot](./screenshots/desktop.png)
-> ![Mobile Screenshot](./screenshots/mobile.png)
-> ```
+ >
+ ![Desktop Screenshot](./screenshots/desktop.png)
+ ![Mobile Screenshot](./screenshots/mobile.png)
+ 
 
 **Key Interface Elements:**
 - ✨ Clean, minimal design with smooth animations
@@ -141,7 +139,7 @@ todo-app/
 
 We're constantly improving Dainwi Todo. Here's what's coming:
 
-- [ ] **🗑️ Task deletion** — Remove completed tasks
+- [x] **🗑️ Task deletion** — Remove completed tasks
 - [ ] **✏️ Edit mode** — Modify existing tasks  
 - [ ] **🏷️ Categories** — Organize with tags
 - [ ] **📅 Due dates** — Time-based organization
