@@ -131,7 +131,7 @@ export default function Home() {
           </DialogContent>
         </Dialog>
 
-        <ScrollArea className="h-[500px] w-full p-4 overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+        <ScrollArea className="h-full w-full p-4 overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
           <div className="space-y-4">
             {tasks.length === 0 ? (
               <p className="text-muted-foreground">No tasks yet. Add one.</p>
