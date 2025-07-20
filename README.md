@@ -140,7 +140,7 @@ todo-app/
 We're constantly improving Dainwi Todo. Here's what's coming:
 
 - [x] **🗑️ Task deletion** — Remove completed tasks
-- [ ] **✏️ Edit mode** — Modify existing tasks  
+- [x] **✏️ Edit mode** — Modify existing tasks  
 - [ ] **🏷️ Categories** — Organize with tags
 - [ ] **📅 Due dates** — Time-based organization
 - [ ] **🌙 Dark mode** — Easy on the eyes

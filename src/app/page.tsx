@@ -19,6 +19,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Plus, Trash2 } from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle"
 
 type Task = {
   title: string;
@@ -67,19 +68,31 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col p-6 space-y-5">
-      <header>
+      {/* <header>
         <h1 className="text-2xl md:text-4xl font-semibold text-neutral-900">
           Hello, <span className="text-neutral-500">there!</span>
         </h1>
         <p className="text-muted-foreground italic mt-2">
           &quot;The secret of getting ahead is getting started.&quot;
         </p>
+      </header> */}
+
+<header className="flex justify-between items-start">
+        <div>
+          <h1 className="text-2xl md:text-4xl font-semibold text-neutral-900 dark:text-neutral-100">
+            Hello, <span className="text-neutral-500">there!</span>
+          </h1>
+          <p className="text-muted-foreground italic mt-2">
+            &quot;The secret of getting ahead is getting started.&quot;
+          </p>
+        </div>
+        <ThemeToggle />
       </header>
 
       <section className="flex flex-col space-y-3 w-full md:w-1/2 md:mx-auto">
         <Dialog>
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-2xl font-semibold text-neutral-800">Tasks</h3>
+            <h3 className="text-2xl font-semibold text-neutral-800 dark:text-neutral-100">Tasks</h3>
             <DialogTrigger asChild>
               <Button>
                 <Plus />
